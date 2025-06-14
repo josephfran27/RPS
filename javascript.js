@@ -55,7 +55,7 @@ document.body.appendChild(resultsBox);
 //for when the game is done and the user wants to play again
 const resetButton = document.createElement('button');
 resetButton.setAttribute("style", "font-family: Copperplate, Papyrus, fantasy; color: #416a59; font-size: 20px; background-color: #73a24e; border: solid #416a59 2px; padding: 2px; background-color: #a9c25d; border-radius: 8px;");
-resetButton.textContent = 'Play Again 🔄'
+resetButton.textContent = 'Play Again 🔄';
 resetButton.addEventListener('click', () => {
     playerScore = 0;
     computerScore = 0;
