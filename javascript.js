@@ -1,8 +1,38 @@
 
+// REIMAGINED VERSION (DOM)
+// const buttonsContainer = document.createElement('div');
+// buttonsContainer.id = 'btnContainer';
+// buttonsContainer.classList.add('container');
+// buttonsContainer.textContent = 'This is where the buttons will be held';
+// document.body.appendChild(buttonsContainer);
 
-console.log("Welcome to Rock, Paper, Scissors!");
 let playerScore = 0;
 let computerScore = 0;
+
+const rockBtn = document.createElement('button');
+const paperBtn = document.createElement('button');
+const scissorsBtn = document.createElement('button');
+
+rockBtn.textContent = '🪨';
+paperBtn.textContent = '📄';
+scissorsBtn.textContent = '✂️'
+
+document.body.appendChild(rockBtn);
+document.body.appendChild(paperBtn);
+document.body.appendChild(scissorsBtn);
+
+//button event listeners
+rockBtn.addEventListener('click', () => {
+    playRound('rock');
+});
+
+paperBtn.addEventListener('click', () => {
+    playRound('paper');
+});
+
+scissorsBtn.addEventListener('click', () => {
+    playRound('scissors');
+});
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -25,11 +55,6 @@ function getComputerChoice() {
     else {
         return "";
     }
-}
-
-function getHumanChoice() {
-    let choice = prompt("Enter a choice (rock, paper, or scissors)");
-    return choice.toLowerCase();
 }
 
 function round(playerChoice, computerChoice, playerScore, computerScore) {
@@ -70,16 +95,8 @@ function round(playerChoice, computerChoice, playerScore, computerScore) {
     return [playerScore, computerScore];
 }
 
-function game() {
-    let rounds = 5;
-    
-    for(let i = 1; i < rounds + 1; i++) {
-        let [updatedPlayerScore, updatedComputerScore] = round(getHumanChoice(), getComputerChoice(), playerScore, computerScore);
-        playerScore = updatedPlayerScore;
-        computerScore = updatedComputerScore;
-        console.log("Round " + i + " finished.")
-        console.log("Scores: Player: " + playerScore + " --- Computer: " + computerScore);
-    }
+function playRound(playerChoice) {
+    const computerChoice = getComputerChoice();
+    [playerScore, computerScore] = round(playerChoice, computerChoice, playerScore, computerScore);
+    console.log(`Player: ${playerScore} --- Computer: ${computerScore}`);
 }
-
-game()
