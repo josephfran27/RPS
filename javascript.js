@@ -1,14 +1,5 @@
 
-// REIMAGINED VERSION (DOM)
-// const buttonsContainer = document.createElement('div');
-// buttonsContainer.id = 'btnContainer';
-// buttonsContainer.classList.add('container');
-// buttonsContainer.textContent = 'This is where the buttons will be held';
-// document.body.appendChild(buttonsContainer);
-
-let playerScore = 0;
-let computerScore = 0;
-
+//UI 
 const rockBtn = document.createElement('button');
 const paperBtn = document.createElement('button');
 const scissorsBtn = document.createElement('button');
@@ -17,9 +8,17 @@ rockBtn.textContent = '🪨';
 paperBtn.textContent = '📄';
 scissorsBtn.textContent = '✂️'
 
-document.body.appendChild(rockBtn);
-document.body.appendChild(paperBtn);
-document.body.appendChild(scissorsBtn);
+//create container for buttons
+const buttonsContainer = document.createElement('div');
+buttonsContainer.setAttribute("style", "background-color: #73a24e; border: solid #416a59 2px; padding: 5px;");
+buttonsContainer.id = 'btnContainer';
+buttonsContainer.classList.add('container');
+document.body.appendChild(buttonsContainer);
+
+//add buttons to container
+buttonsContainer.appendChild(rockBtn);
+buttonsContainer.appendChild(paperBtn);
+buttonsContainer.appendChild(scissorsBtn);
 
 //button event listeners
 rockBtn.addEventListener('click', () => {
@@ -33,6 +32,26 @@ paperBtn.addEventListener('click', () => {
 scissorsBtn.addEventListener('click', () => {
     playRound('scissors');
 });
+
+//score div
+const scoreBox = document.createElement('div');
+scoreBox.setAttribute("style", "background-color: #73a24e; border: solid #416a59 2px; padding: 5px;");
+scoreBox.textContent = 'Score Box'
+scoreBox.id = 'scoreBox';
+scoreBox.classList.add('container');
+document.body.appendChild(scoreBox);
+
+//result div
+const resultsBox = document.createElement('div');
+resultsBox.setAttribute("style", "background-color: #73a24e; border: solid #416a59 2px; padding: 5px;");
+resultsBox.textContent = 'Results Box'
+resultsBox.id = 'resultsBox';
+resultsBox.classList.add('container');
+document.body.appendChild(resultsBox);
+
+//ACTUAL GAME LOGIC
+let playerScore = 0;
+let computerScore = 0;
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -57,46 +76,30 @@ function getComputerChoice() {
     }
 }
 
-function round(playerChoice, computerChoice, playerScore, computerScore) {
-    //same choices
+function round(roundString, playerChoice, computerChoice, playerScore, computerScore) {
     if(playerChoice == computerChoice) {
-        console.log("There was a tie! Nobody gets a point.");
+        roundString = 'There was a tie!';
     }
-
-    //rock vs paper
-    if(playerChoice == "rock" && computerChoice == "paper") {
-        console.log("You lose! Paper beats Rock.");
-        computerScore++;
-    }
-    else if(computerChoice == "rock" && playerChoice == "paper") {
-        console.log("You win! Paper beats Rock!");
+    else if (
+        (playerChoice == "rock" && computerChoice == "scissors") ||
+        (playerChoice == "paper" && computerChoice == "rock") ||
+        (playerChoice == "scissors" && computerChoice == "paper") 
+    ){
+        roundString = `You win! ${playerChoice} beats ${computerChoice}!`;
         playerScore++;
     }
-
-    //rock vs scissors
-    else if(playerChoice == "rock" && computerChoice == "scissors") {
-        console.log("You win! Rock beats Scissors.");
-        playerScore++;
-    }
-    else if(computerChoice == "rock" && playerChoice == "scissors") {
-        console.log("You lose! Rock beats Scissors!");
+    else {
+        roundString = `You lost! ${computerChoice} beats ${playerChoice}.`;
         computerScore++;
     }
 
-    //paper vs scissors
-    else if(playerChoice == "paper" && computerChoice == "scissors") {
-        console.log("You lose! Scissors beats paper.");
-        computerScore++;
-    }
-    else if(computerChoice == "paper" && playerChoice == "scissors") {
-        console.log("You win! Scissors beats paper.");
-        playerScore++;
-    }
-    return [playerScore, computerScore];
+    return [roundString, playerScore, computerScore];
 }
 
 function playRound(playerChoice) {
+    let roundString = '';
     const computerChoice = getComputerChoice();
-    [playerScore, computerScore] = round(playerChoice, computerChoice, playerScore, computerScore);
-    console.log(`Player: ${playerScore} --- Computer: ${computerScore}`);
+    [roundString, playerScore, computerScore] = round(roundString, playerChoice, computerChoice, playerScore, computerScore);
+    resultsBox.textContent = roundString;
+    scoreBox.textContent = `Player: ${playerScore} VS Computer: ${computerScore}`;
 }
