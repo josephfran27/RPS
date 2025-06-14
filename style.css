@@ -69,3 +69,12 @@ h1 {
     background-color: #8ea44e;
     transform: scale(1.1);
 }
+
+#footer {
+    font-size: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+}

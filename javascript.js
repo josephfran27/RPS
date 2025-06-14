@@ -68,6 +68,11 @@ document.body.appendChild(scoreBox);
 document.body.appendChild(buttonsContainer);
 document.body.appendChild(resultsBox);
 
+const footer = document.createElement('p');
+footer.textContent = 'By Joseph France';
+footer.id = 'footer';
+document.body.appendChild(footer);
+
 //ACTUAL GAME LOGIC
 let playerScore = 0;
 let computerScore = 0;
