@@ -1,27 +1,17 @@
 
-//UI 
+//UI
+
+//BUTTONS
 const rockBtn = document.createElement('button');
 const paperBtn = document.createElement('button');
 const scissorsBtn = document.createElement('button');
 
 rockBtn.textContent = '🪨';
-rockBtn.setAttribute("style", "font-size: 35px; border: solid #416a59 1px; background-color: #a9c25d; width: 75px; height: 65px; border-radius: 8px;");
 paperBtn.textContent = '📄';
-paperBtn.setAttribute("style", "font-size: 35px; border: solid #416a59 1px; background-color: #a9c25d; width: 75px; height: 65px; border-radius: 8px;");
 scissorsBtn.textContent = '✂️';
-scissorsBtn.setAttribute("style", "font-size: 35px; border: solid #416a59 1px; background-color: #a9c25d; width: 75px; height: 65px; border-radius: 8px;");
 
-//score div
-const scoreBox = document.createElement('div');
-scoreBox.setAttribute("style", "font-size: 30px; background-color: #73a24e; border: solid #416a59 2px; padding: 5px;");
-scoreBox.textContent = 'Player: 0 VS Computer: 0';
-scoreBox.id = 'scoreBox';
-scoreBox.classList.add('container');
-document.body.appendChild(scoreBox);
-
-//create container for buttons
+//buttons container
 const buttonsContainer = document.createElement('div');
-buttonsContainer.setAttribute("style", "background-color: #73a24e; border: solid #416a59 2px; padding: 5px;");
 buttonsContainer.id = 'btnContainer';
 buttonsContainer.classList.add('container');
 document.body.appendChild(buttonsContainer);
@@ -44,24 +34,39 @@ scissorsBtn.addEventListener('click', () => {
     playRound('scissors');
 });
 
-//result div
+
+//SCORE CONTAINER
+const scoreBox = document.createElement('div');
+scoreBox.textContent = 'Player: 0 VS Computer: 0';
+scoreBox.id = 'scoreBox';
+scoreBox.classList.add('container');
+
+
+//RESULTS CONTAINER
 const resultsBox = document.createElement('div');
-resultsBox.setAttribute("style", "font-size: 20px; background-color: #73a24e; border: solid #416a59 2px; padding: 5px;");
 resultsBox.textContent = 'Make a choice to begin the game!'
 resultsBox.id = 'resultsBox';
 resultsBox.classList.add('container');
 document.body.appendChild(resultsBox);
 
-//for when the game is done and the user wants to play again
+//RESET BUTTON
 const resetButton = document.createElement('button');
-resetButton.setAttribute("style", "font-family: Copperplate, Papyrus, fantasy; color: #416a59; font-size: 20px; background-color: #73a24e; border: solid #416a59 2px; padding: 2px; background-color: #a9c25d; border-radius: 8px;");
 resetButton.textContent = 'Play Again 🔄';
+resetButton.id = 'resetBtn';
+resultsBox.classList.add('button');
 resetButton.addEventListener('click', () => {
     playerScore = 0;
     computerScore = 0;
-    resultsBox.textContent = 'Results Box';
-    scoreBox.textContent = 'Score Box';
+    scoreBox.textContent = 'Player: 0 VS Computer: 0';
+    resultsBox.textContent = 'Make a choice to begin the game!';
+    resultsBox.setAttribute("style", "font-size: 25px;");
+    document.body.removeChild(resetButton);
 })
+
+//append in desired order
+document.body.appendChild(scoreBox);
+document.body.appendChild(buttonsContainer);
+document.body.appendChild(resultsBox);
 
 //ACTUAL GAME LOGIC
 let playerScore = 0;
@@ -122,13 +127,13 @@ function playRound(playerChoice) {
 
     if(playerScore === 5 || computerScore === 5) {
         if(playerScore === 5) {
-            resultsBox.textContent = 'Congrats, you win the game!   ';
-            resultsBox.appendChild(resetButton);
+            resultsBox.textContent = ' 🎉Congrats, you win the game! 🎉';
+            resultsBox.setAttribute("style", "font-size: 50px;");
         }
         else {
-            resultsBox.textContent = 'Sorry, you lost. Better luck next time!   ';
-            resultsBox.appendChild(resetButton);
+            resultsBox.textContent = 'Sorry, you lost. Better luck next time!';
         }
+        document.body.appendChild(resetButton);
     }
 }
 

@@ -1,1 +1,71 @@
-style.css
+
+body {
+    background-color: #f5eec2;
+    color: #416a59;
+    font-family: Copperplate, Papyrus, fantasy;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+#scoreBox {
+    text-align: center;
+    font-size: 40px;
+    background-color: #73a24e;
+    border: solid #416a59 5px;
+    padding: 20px 10px;
+}
+
+#btnContainer {
+    margin-top: 5px;
+    display: flex;
+    background-color: #73a24e;
+    border: solid #416a59 5px; 
+    padding: 30px 10px;
+    justify-content: center;
+    gap: 15px;
+    border-bottom: 0px;
+}
+
+#btnContainer button {
+    font-size: 60px;
+    border: solid #416a59 2px; 
+    background-color: #a9c25d;
+    width: 120px; 
+    height: 100px;
+    border-radius: 8px;
+}
+
+#btnContainer button:hover {
+    background-color: #8ea44e;
+    transform: scale(1.1);
+}
+
+#resultsBox {
+    text-align: center;
+    font-size: 25px;
+    background-color: #73a24e;
+    border: solid #416a59 5px;
+    border-top: 0px;
+    padding: 20px 10px;
+}
+
+#resetBtn {
+    display: block;
+    text-align: center;
+    margin: 5px auto 0 auto;  
+    color: #416a59;
+    font-family: Copperplate, Papyrus, fantasy;
+    font-size: 25px;
+    background-color: #a9c25d;
+    border: solid #416a59 2px; 
+    padding: 2px; 
+    border-radius: 8px;
+}
+
+#resetBtn:hover {
+    background-color: #8ea44e;
+    transform: scale(1.1);
+}
