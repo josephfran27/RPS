@@ -14,7 +14,7 @@ scissorsBtn.setAttribute("style", "font-size: 35px; border: solid #416a59 1px; b
 //score div
 const scoreBox = document.createElement('div');
 scoreBox.setAttribute("style", "font-size: 30px; background-color: #73a24e; border: solid #416a59 2px; padding: 5px;");
-scoreBox.textContent = 'Score Box'
+scoreBox.textContent = 'Player: 0 VS Computer: 0';
 scoreBox.id = 'scoreBox';
 scoreBox.classList.add('container');
 document.body.appendChild(scoreBox);
@@ -37,20 +37,31 @@ rockBtn.addEventListener('click', () => {
 });
 
 paperBtn.addEventListener('click', () => {
-    playRound('rock');
+    playRound('paper');
 });
 
 scissorsBtn.addEventListener('click', () => {
-    playRound('rock');
+    playRound('scissors');
 });
 
 //result div
 const resultsBox = document.createElement('div');
 resultsBox.setAttribute("style", "font-size: 20px; background-color: #73a24e; border: solid #416a59 2px; padding: 5px;");
-resultsBox.textContent = 'Results Box'
+resultsBox.textContent = 'Make a choice to begin the game!'
 resultsBox.id = 'resultsBox';
 resultsBox.classList.add('container');
 document.body.appendChild(resultsBox);
+
+//for when the game is done and the user wants to play again
+const resetButton = document.createElement('button');
+resetButton.setAttribute("style", "font-family: Copperplate, Papyrus, fantasy; color: #416a59; font-size: 20px; background-color: #73a24e; border: solid #416a59 2px; padding: 2px; background-color: #a9c25d; border-radius: 8px;");
+resetButton.textContent = 'Play Again 🔄'
+resetButton.addEventListener('click', () => {
+    playerScore = 0;
+    computerScore = 0;
+    resultsBox.textContent = 'Results Box';
+    scoreBox.textContent = 'Score Box';
+})
 
 //ACTUAL GAME LOGIC
 let playerScore = 0;
@@ -81,7 +92,7 @@ function getComputerChoice() {
 
 function round(roundString, playerChoice, computerChoice, playerScore, computerScore) {
     if(playerChoice == computerChoice) {
-        roundString = 'There was a tie!';
+        roundString = `There was a tie! (${playerChoice} & ${computerChoice})`;
     }
     else if (
         (playerChoice == "rock" && computerChoice == "scissors") ||
@@ -92,7 +103,7 @@ function round(roundString, playerChoice, computerChoice, playerScore, computerS
         playerScore++;
     }
     else {
-        roundString = `You lost! ${computerChoice} beats ${playerChoice}.`;
+        roundString = `You lost! ${playerChoice} loses to ${computerChoice}.`;
         computerScore++;
     }
 
@@ -109,12 +120,14 @@ function playRound(playerChoice) {
     resultsBox.textContent = roundString;
     scoreBox.textContent = `Player: ${playerScore} VS Computer: ${computerScore}`;
 
-    if(playerScore === 5 || computerScore ===5) {
+    if(playerScore === 5 || computerScore === 5) {
         if(playerScore === 5) {
-            resultsBox.textContent = 'Congrats, you win the game!';
+            resultsBox.textContent = 'Congrats, you win the game!   ';
+            resultsBox.appendChild(resetButton);
         }
         else {
-            resultsBox.textContent = 'Sorry, you lost. Better luck next time!';
+            resultsBox.textContent = 'Sorry, you lost. Better luck next time!   ';
+            resultsBox.appendChild(resetButton);
         }
     }
 }
